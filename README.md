@@ -1,4 +1,7 @@
 
+Base from modular-webapp archetype:
+[https://github.com/tbroyer/gwt-maven-archetypes/](https://github.com/tbroyer/gwt-maven-archetypes/)
+
 [gwt-maven-plugin](https://tbroyer.github.io/gwt-maven-plugin/)
 
 Consider [http://samaxes.github.io/minify-maven-plugin](http://samaxes.github.io/minify-maven-plugin/) for webjar libs.
