@@ -12,6 +12,14 @@
 	<artifactId>ErraiGWT-client</artifactId>
 	<packaging>gwt-app</packaging>
 
+	<properties>
+		<sassDestinationDirName>sass-compiled</sassDestinationDirName>
+		<sassDestinationDir>${project.build.directory}/${sassDestinationDirName}</sassDestinationDir>
+		<moduleShortName>app</moduleShortName>
+		
+		<webjar.bootstrap.version>3.3.7</webjar.bootstrap.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -32,16 +40,61 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>${webjar.bootstrap.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+				
+			<!-- Copy hostpage to gwt build directory -->
+			<resource>
+				<directory>src/main/resources/at/woodstick/erraigwt/hostpage</directory>
+				<targetPath>${project.build.directory}/${project.build.finalName}</targetPath>
+			</resource>
+			
+			<!-- Copy compiled sass to gwt build directory -->
+			<resource>
+				<directory>${sassDestinationDir}</directory>
+				<targetPath>${project.build.directory}/${project.build.finalName}/css</targetPath>
+				<excludes>
+					<exclude>*.map</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	
 		<plugins>
 			<plugin>
 				<groupId>net.ltgt.gwt.maven</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
 				<configuration>
 					<moduleName>at.woodstick.erraigwt.App</moduleName>
-					<moduleShortName>app</moduleShortName>
+					<moduleShortName>${moduleShortName}</moduleShortName>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>nl.geodienstencentrum.maven</groupId>
+				<artifactId>sass-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>compile-sass</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>update-stylesheets</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<destination>${sassDestinationDir}</destination>
+					<sassSourceDirectory>${basedir}/src/main/resources/sass</sassSourceDirectory>
 				</configuration>
 			</plugin>
 		</plugins>

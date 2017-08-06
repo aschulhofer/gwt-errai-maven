@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 	<inherits name="com.google.gwt.user.User" />
-	<inherits name="com.google.gwt.user.theme.clean.Clean" />
 
 	<source path="" />
+	
+	<stylesheet src="ErraiGWT.css"></stylesheet>
 
 	<entry-point class="at.woodstick.erraigwt.App" />
 
