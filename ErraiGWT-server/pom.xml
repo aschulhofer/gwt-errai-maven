@@ -55,38 +55,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		
-		<plugins>
-<!-- 			<plugin> -->
-<!-- 				<artifactId>maven-war-plugin</artifactId> -->
-<!-- 				<version>3.0.0</version> -->
-<!-- 				<configuration> -->
-<!-- 					<webResources> -->
-<!-- 						<webResource> -->
-<!-- 							<directory>src/main/webapp</directory> -->
-<!-- 							<filtering>true</filtering> -->
-<!-- 							<includes> -->
-<!-- 								<include>**/WEB-INF/beans.xml</include> -->
-<!-- 								<include>**/WEB-INF/web.xml</include> -->
-<!-- 							</includes> -->
-<!-- 						</webResource> -->
-<!-- 					</webResources> -->
-<!-- 					<overlays> -->
-<!-- 						<overlay> -->
-<!-- 							<groupId>at.axtesys.globalprojectreporting</groupId> -->
-<!-- 							<artifactId>gpr-client</artifactId> -->
-<!-- 						</overlay> -->
-<!-- 					</overlays> -->
-<!-- 					<packagingExcludes> -->
-<!-- 						**/javax/**/*.*,**/client/local/**/*.class,WEB-INF/dev/*.*,WEB-INF/dev/,WEB-INF/classes/mail/** -->
-<!-- 					</packagingExcludes> -->
-<!-- 					<outputFileNameMapping> -->
-<!-- 						@{artifactId}@-@{baseVersion}@@{dashClassifier?}@.@{extension}@ -->
-<!-- 					</outputFileNameMapping> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-		
-		</plugins>
 	</build>
 
 	<profiles>
