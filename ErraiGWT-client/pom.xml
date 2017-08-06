@@ -15,9 +15,12 @@
 	<properties>
 		<sassDestinationDirName>sass-compiled</sassDestinationDirName>
 		<sassDestinationDir>${project.build.directory}/${sassDestinationDirName}</sassDestinationDir>
+		<webjarsDir>${project.build.directory}/webjars/META-INF/resources/webjars</webjarsDir>
 		<moduleShortName>app</moduleShortName>
 		
-		<webjar.bootstrap.version>3.3.7</webjar.bootstrap.version>
+		<!-- webjar client library versions -->
+		<bootstrap.version>3.3.7</bootstrap.version>
+		<jquery.version>2.2.4</jquery.version>
 	</properties>
 
 	<dependencies>
@@ -44,7 +47,12 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>${webjar.bootstrap.version}</version>
+			<version>${bootstrap.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jquery.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -58,6 +66,13 @@
 			<resource>
 				<directory>src/main/resources/at/woodstick/erraigwt/hostpage</directory>
 				<targetPath>${project.build.directory}/${project.build.finalName}</targetPath>
+				<filtering>true</filtering>
+			</resource>
+			
+			<!-- Copy gwt-app root files to gwt build directory -->
+			<resource>
+				<directory>src/main/resources/at/woodstick/erraigwt/root</directory>
+				<targetPath>${project.build.directory}/${project.build.finalName}</targetPath>
 			</resource>
 			
 			<!-- Copy compiled sass to gwt build directory -->
@@ -68,6 +83,12 @@
 					<exclude>*.map</exclude>
 				</excludes>
 			</resource>
+			
+			<!-- Copy webjars to gwt build directory -->
+			<resource>
+				<directory>${webjarsDir}</directory>
+				<targetPath>${project.build.directory}/${project.build.finalName}/external</targetPath>
+			</resource>
 		</resources>
 	
 		<plugins>
@@ -77,6 +98,26 @@
 				<configuration>
 					<moduleName>at.woodstick.erraigwt.App</moduleName>
 					<moduleShortName>${moduleShortName}</moduleShortName>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-webjars</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includeGroupIds>org.webjars</includeGroupIds>
+            		<includes>**/*.js,**/*.css,**/fonts/*.*</includes>
+            		<excludes>webjars-requirejs.js</excludes>
+            		<outputDirectory>${project.build.directory}/webjars</outputDirectory>
 				</configuration>
 			</plugin>
 			
