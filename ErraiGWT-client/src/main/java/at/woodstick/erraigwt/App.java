@@ -1,97 +1,61 @@
 package at.woodstick.erraigwt;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import javax.annotation.PostConstruct;
+
+import org.jboss.errai.ioc.client.api.EntryPoint;
+import org.jboss.errai.ui.nav.client.local.DefaultPage;
+import org.jboss.errai.ui.nav.client.local.Navigation;
+import org.jboss.errai.ui.nav.client.local.UniquePageRole;
+import org.jboss.errai.ui.nav.client.local.api.PageNavigationErrorHandler;
+import org.slf4j.Logger;
+
+import com.google.gwt.core.client.GWT;
+import com.google.inject.Inject;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class App implements EntryPoint {
+@EntryPoint
+public class App {
 
+	@Inject
+	private Logger log;
+	
+	@Inject
+	private Navigation navigation;
+	
 	/**
 	 * This is the entry point method.
 	 */
+	@PostConstruct
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
+
+		log.debug("Starting app entrypoint...");
 		
-		final NameSpec nameFieldSpec = new NameSpec("GWT USER 2");
-		
-		final TextBox nameField = new TextBox();
-		nameField.setText(nameFieldSpec.getName());
-		final Label errorLabel = new Label();
+		navigation.setErrorHandler(new PageNavigationErrorHandler() {
+			@Override
+			public void handleInvalidPageNameError(Exception exception, String pageName) {
+				log.error(pageName, exception);
+			}
 
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
+			@Override
+			public void handleError(Exception exception, Class<? extends UniquePageRole> pageRole) {
+				log.error("", exception);
+			}
 
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
-		RootPanel.get("errorLabelContainer").add(errorLabel);
-
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
-
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Remote Procedure Call");
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-		final Label textToServerLabel = new Label();
-		final HTML serverResponseLabel = new HTML();
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-		dialogVPanel.add(textToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-		dialogVPanel.add(serverResponseLabel);
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
-
-		// Add a handler to close the DialogBox
-		closeButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				dialogBox.hide();
-				sendButton.setEnabled(true);
-				sendButton.setFocus(true);
+			@Override
+			public void handleInvalidURLError(Exception exception, String urlPath) {
+				log.error(urlPath, exception);
 			}
 		});
-
-		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler {
-			/**
-			 * Fired when the user clicks on the sendButton.
-			 */
-			public void onClick(ClickEvent event) {
+		 
+		GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
+			@Override
+			public void onUncaughtException(Throwable e) {
+				log.error("Uncaught GWT exception!", e);
 			}
-
-			/**
-			 * Fired when the user types in the nameField.
-			 */
-			public void onKeyUp(KeyUpEvent event) {
-				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-				}
-			}
-		}
-
-		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();
-		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
+		});
+		
+		navigation.goToWithRole(DefaultPage.class);
 	}
 }
