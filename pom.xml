@@ -17,6 +17,9 @@
 		
 		<wildfly.home>${env.WF_HOME}</wildfly.home>
 		<wildfly.version>10.1.0.Final</wildfly.version>
+		
+		<!-- Test dependency versions -->
+		<junit.version>4.12</junit.version>
 	</properties>
 
 	<dependencyManagement>
@@ -35,11 +38,33 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>3.1.0</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>javax.ws.rs-api</artifactId>
+				<version>2.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>7.0</version>
+				<scope>provided</scope>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 

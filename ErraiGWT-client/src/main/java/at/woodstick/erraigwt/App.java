@@ -2,6 +2,7 @@ package at.woodstick.erraigwt;
 
 import javax.annotation.PostConstruct;
 
+import org.jboss.errai.enterprise.client.jaxrs.api.RestClient;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 import org.jboss.errai.ui.nav.client.local.DefaultPage;
 import org.jboss.errai.ui.nav.client.local.Navigation;
@@ -31,6 +32,9 @@ public class App {
 	public void onModuleLoad() {
 
 		log.debug("Starting app entrypoint...");
+		
+		RestClient.setApplicationRoot("rest");
+		RestClient.setJacksonMarshallingActive(true);
 		
 		navigation.setErrorHandler(new PageNavigationErrorHandler() {
 			@Override

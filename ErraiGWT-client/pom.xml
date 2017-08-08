@@ -75,6 +75,10 @@
 			<groupId>org.jboss.errai</groupId>
 			<artifactId>errai-cdi-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.errai</groupId>
+			<artifactId>errai-jaxrs-client</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -140,9 +144,6 @@
 				<configuration>
 					<moduleName>at.woodstick.erraigwt.App</moduleName>
 					<moduleShortName>${moduleShortName}</moduleShortName>
-					
-<!-- 					<codeserverWorkDir>${project.build.directory}/gwt/codeserver</codeserverWorkDir> -->
-<!-- 					<launcherDir>${project.build.directory}/gwt/launcherDir</launcherDir> -->
 				</configuration>
 			</plugin>
 			
