@@ -1,4 +1,5 @@
 **Notes**
+
 Base from modular-webapp archetype:
 [https://github.com/tbroyer/gwt-maven-archetypes/](https://github.com/tbroyer/gwt-maven-archetypes/)
 
@@ -14,6 +15,7 @@ Consider [http://samaxes.github.io/minify-maven-plugin](http://samaxes.github.io
 Set `WF_HOME` enviornment variable to root of wildfly installation. Or set user property `${wildfly.home}` on `mvn` command `-Dwildfly.home=<wf root dir path>`.
 
 **SDM**
+
 Start devmode: `mvn gwt:devmode`
 
     Wait for codeserver to start and open url, autocompile changes on browser refresh.
@@ -24,6 +26,7 @@ Start super dev mode (this call is deprecated in this project):
 Use bookmarks to compile, [http://localhost:9876](http://localhost:9876).
 
 **Misc**
+
 `mvn clean install wildfly:deploy-only -pl *-server -Dwildfly.deployment.name=gwttest.war`
 
 `mvn wildfly:deploy-only -pl *-server -Dwildfly.deployment.name=gwt.war`
