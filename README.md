@@ -9,8 +9,14 @@ Consider [http://samaxes.github.io/minify-maven-plugin](http://samaxes.github.io
 [sass-maven-plugin](http://www.geodienstencentrum.nl/sass-maven-plugin/)
 
 
-Start super dev mode:
+Start super dev mode (this call is deprecated in this project):
 `mvn gwt:codeserver -pl *-client -am`
+
+Start devmode:
+`mvn gwt:devmode`
+
+Wait for codeserver to start and open url, autocompile changes on browser refresh.
+
 
 Use bookmarks to compile, [http://localhost:9876](http://localhost:9876).
 
@@ -29,3 +35,4 @@ Package war and install do not compile gwt-app
 
 Package war and install do not compile gwt-app and deploy to wildfly with context name `gwt`
 `mvn install -pl *-server -am -Dgwt.skipCompilation=true && mvn wildfly:deploy-only -pl *-server -Dwildfly.deployment.name=gwt.war`
+

@@ -11,4 +11,12 @@ public class NameSpec {
 	public String getName() {
 		return name;
 	}
+	
+	public String getExtName() {
+		return name + ".ext";
+	}
+	
+	public String getConst() {
+		return "const";
+	}
 }

@@ -40,30 +40,40 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
+		</dependency>
+		
+		<!-- Only used for EmbeddedWildFlyLauncher during GWT Super Dev Mode -->
+		<dependency>
+			<groupId>org.jboss.errai</groupId>
+			<artifactId>errai-cdi-jboss</artifactId>
+<!-- 			<scope>runtime</scope> -->
+			<exclusions>
+				<exclusion>
+					<groupId>sun.jdk</groupId>
+					<artifactId>jconsole</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.errai</groupId>
 			<artifactId>errai-data-binding</artifactId>
-<!-- 			<scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.errai</groupId>
 			<artifactId>errai-ui</artifactId>
-<!-- 			<scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.errai</groupId>
 			<artifactId>errai-navigation</artifactId>
-<!-- 			<scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.errai</groupId>
 			<artifactId>errai-cdi-client</artifactId>
-<!-- 			<scope>provided</scope> -->
 		</dependency>
 
 		<dependency>
@@ -130,6 +140,9 @@
 				<configuration>
 					<moduleName>at.woodstick.erraigwt.App</moduleName>
 					<moduleShortName>${moduleShortName}</moduleShortName>
+					
+<!-- 					<codeserverWorkDir>${project.build.directory}/gwt/codeserver</codeserverWorkDir> -->
+<!-- 					<launcherDir>${project.build.directory}/gwt/launcherDir</launcherDir> -->
 				</configuration>
 			</plugin>
 			

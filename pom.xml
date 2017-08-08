@@ -11,8 +11,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
-		<errai.version>4.0.0.Final</errai.version>
+		<!-- update to 4.0.1.Final or 4.0.2.Final as soon as published in maven repo -->
+		<errai.version>4.0.1.Beta2</errai.version>
 		<gwt.version>2.8.1</gwt.version>
+		
+		<wildfly.home>${env.WF_HOME}</wildfly.home>
+		<wildfly.version>10.1.0.Final</wildfly.version>
 	</properties>
 
 	<dependencyManagement>
@@ -44,10 +48,6 @@
 			<plugin>
 				<groupId>net.ltgt.gwt.maven</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<inherited>false</inherited>
-				<configuration>
-					<launcherDir>${project.build.directory}/gwt/launcherDir</launcherDir>
-				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -91,6 +91,19 @@
 					<configuration>
 						<sourceLevel>1.8</sourceLevel>
 						<failOnError>true</failOnError>
+						<devmodeArgs>
+							<devmodeArg>-style</devmodeArg>
+							<devmodeArg>PRETTY</devmodeArg>
+							<devmodeArg>-server</devmodeArg>
+							<devmodeArg>org.jboss.errai.cdi.server.gwt.EmbeddedWildFlyLauncher</devmodeArg>
+							<devmodeArg>-startupUrl</devmodeArg>
+							<devmodeArg>http://127.0.0.1:8080/ErraiGWT-server-${project.version}</devmodeArg>
+						</devmodeArgs>
+						<warDir>ErraiGWT-server/target/ErraiGWT-server-${project.version}</warDir>
+						<systemProperties>
+							<errai.jboss.home>${wildfly.home}</errai.jboss.home>
+							<errai.dev.context>ErraiGWT-server-${project.version}</errai.dev.context>
+						</systemProperties>
 					</configuration>
 				</plugin>
 				
@@ -119,7 +132,7 @@
 					<artifactId>wildfly-maven-plugin</artifactId>
 					<version>1.1.0.Final</version>
 					<configuration>
-						<skip>false</skip>
+						<skip>true</skip>
 					</configuration>
 				</plugin>
 				
