@@ -20,6 +20,7 @@
 		
 		<!-- Test dependency versions -->
 		<junit.version>4.12</junit.version>
+		<hamcrest.version>1.3</hamcrest.version>
 	</properties>
 
 	<dependencyManagement>
@@ -45,6 +46,13 @@
 				<version>${junit.version}</version>
 				<scope>test</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-library</artifactId>
+				<version>${hamcrest.version}</version>
+				<scope>test</scope>
+			</dependency>
 			
 			<dependency>
 				<groupId>javax.servlet</groupId>
@@ -67,6 +75,18 @@
 			
 		</dependencies>
 	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
