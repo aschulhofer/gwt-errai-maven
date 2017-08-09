@@ -8,6 +8,7 @@ import org.jboss.errai.common.client.api.RemoteCallback;
 import org.jboss.errai.enterprise.client.jaxrs.MarshallingWrapper;
 import org.jboss.errai.enterprise.client.jaxrs.api.RestErrorCallback;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
+import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.nav.client.local.Page;
 import org.jboss.errai.ui.nav.client.local.PageShowing;
 import org.jboss.errai.ui.nav.client.local.PageShown;
@@ -21,7 +22,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
@@ -30,7 +30,7 @@ import at.woodstick.erraigwt.service.TestRestEndpointService;
 
 @Page(path = "overview")
 @Templated
-public class OverviewPage extends Composite {
+public class OverviewPage implements IsElement {
 
 	@Inject
 	private Logger log;
@@ -46,6 +46,10 @@ public class OverviewPage extends Composite {
 	@Inject
 	@DataField("in3")
 	private Label itemField3;
+	
+	@Inject
+	@DataField("in-bound1")
+	private ItemSpecInfo itemFieldBound1;
 	
 	@Inject
 	@DataField("item-input")
@@ -65,6 +69,8 @@ public class OverviewPage extends Composite {
 		setItemText(itemField1, itemSpec1);
 		setItemText(itemField2, itemSpec1);
 		setItemText(itemField3, itemSpec1);
+		
+		itemFieldBound1.setModel(new ItemSpec("0123455.bound"));
 		
 		refreshItemFieldButton.addClickHandler(new ClickHandler() {
 			
@@ -93,8 +99,6 @@ public class OverviewPage extends Composite {
 	@PageShown
 	private void showPage() {
 		log.debug("Overview page shown");
-		
-		
 	}
 	
 	@AfterInitialization

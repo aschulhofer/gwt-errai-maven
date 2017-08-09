@@ -24,7 +24,7 @@ public class LandingPage extends Composite {
 	
 	@Inject
 	@DataField("namespec")
-	private Label namespecField;
+	private NameSpecInfo namespecInfoField;
 	
 	@Inject
 	@DataField("namespec2")
@@ -37,7 +37,7 @@ public class LandingPage extends Composite {
 	@PostConstruct
 	private void constructed() {
 		NameSpec namespec = new NameSpec("Testname");
-		namespecField.setText(namespec.getExtName());
+		namespecInfoField.setModel(namespec);
 		
 		namespecParagraphField.setText("Not set." + " " + namespec.getConst());
 	}
