@@ -18,6 +18,10 @@
 		<wildfly.home>${env.WF_HOME}</wildfly.home>
 		<wildfly.version>10.1.0.Final</wildfly.version>
 		
+		<devmode.errai.context>webapp-${project.version}</devmode.errai.context>
+		<devmode.war.dir>webapp/target/webapp-${project.version}</devmode.war.dir>
+		<devmode.start.url>webapp-${project.version}</devmode.start.url>
+		
 		<!-- Test dependency versions -->
 		<junit.version>4.12</junit.version>
 		<hamcrest.version>1.3</hamcrest.version>
@@ -142,12 +146,12 @@
 							<devmodeArg>-server</devmodeArg>
 							<devmodeArg>org.jboss.errai.cdi.server.gwt.EmbeddedWildFlyLauncher</devmodeArg>
 							<devmodeArg>-startupUrl</devmodeArg>
-							<devmodeArg>http://127.0.0.1:8080/ErraiGWT-server-${project.version}</devmodeArg>
+							<devmodeArg>http://127.0.0.1:8080/${devmode.start.url}</devmodeArg>
 						</devmodeArgs>
-						<warDir>ErraiGWT-server/target/ErraiGWT-server-${project.version}</warDir>
+						<warDir>${devmode.war.dir}</warDir>
 						<systemProperties>
 							<errai.jboss.home>${wildfly.home}</errai.jboss.home>
-							<errai.dev.context>ErraiGWT-server-${project.version}</errai.dev.context>
+							<errai.dev.context>${devmode.errai.context}</errai.dev.context>
 						</systemProperties>
 					</configuration>
 				</plugin>
@@ -193,5 +197,6 @@
 		<module>ErraiGWT-client</module>
 		<module>ErraiGWT-shared</module>
 		<module>ErraiGWT-server</module>
+		<module>webapp</module>
 	</modules>
 </project>

@@ -12,10 +12,6 @@
 	<artifactId>ErraiGWT-server</artifactId>
 	<packaging>war</packaging>
 
-	<dependencyManagement>
-		
-	</dependencyManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -41,94 +37,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-maven-plugin</artifactId>
-					<configuration>
-						<skip>false</skip>
-						<scanIntervalSeconds>1</scanIntervalSeconds>
-						<webApp>
-							<extraClasspath>${basedir}/../ErraiGWT-shared/target/classes/</extraClasspath>
-						</webApp>
-					</configuration>
-				</plugin>
-				
-				<plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-					<artifactId>tomcat7-maven-plugin</artifactId>
-					<configuration>
-						<addWarDependenciesInClassloader>false</addWarDependenciesInClassloader>
-						<path>/</path>
-						<uriEncoding>UTF-8</uriEncoding>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.wildfly.plugins</groupId>
-					<artifactId>wildfly-maven-plugin</artifactId>
-					<configuration>
-						<skip>false</skip>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-
-	<profiles>
-		<profile>
-			<!-- XXX: We want to exclude ErraiGWT-client from 'env-dev' profile, Maven 
-				forces us to make a 'env-prod' profile -->
-			<id>env-prod</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>${project.groupId}</groupId>
-					<artifactId>ErraiGWT-client</artifactId>
-					<version>${project.version}</version>
-					<type>war</type>
-					<scope>runtime</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>env-dev</id>
-			<activation>
-				<property>
-					<name>env</name>
-					<value>dev</value>
-				</property>
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.jetty</groupId>
-							<artifactId>jetty-maven-plugin</artifactId>
-							<configuration>
-								<webApp>
-									<baseResource
-										implementation="org.eclipse.jetty.util.resource.ResourceCollection">
-										<resourcesAsCSV>src/main/webapp,${basedir}/../target/gwt/launcherDir/</resourcesAsCSV>
-									</baseResource>
-								</webApp>
-							</configuration>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.tomcat.maven</groupId>
-							<artifactId>tomcat7-maven-plugin</artifactId>
-							<configuration>
-								<contextFile>${basedir}/src/main/tomcatconf/context.xml</contextFile>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-	</profiles>
+	
 </project>
