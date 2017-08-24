@@ -16,6 +16,8 @@ import org.slf4j.Logger;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 
+import at.woodstick.erraigwt.element.DataForm;
+import at.woodstick.erraigwt.element.DataFormModel;
 import at.woodstick.erraigwt.element.EventCountComponent;
 import at.woodstick.erraigwt.element.ParanthesesLabel;
 import at.woodstick.erraigwt.element.ParanthesesTextLabel;
@@ -24,6 +26,9 @@ import at.woodstick.erraigwt.interop.wrapper.JSON;
 import at.woodstick.erraigwt.interop.wrapper.SumWrapper;
 
 import static at.woodstick.erraigwt.interop.wrapper.JQuery.$;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Page(role = DefaultPage.class, path = Pages.Paths.HOME)
 @Templated
@@ -60,6 +65,10 @@ public class LandingPage extends Composite {
 	@DataField("count-event-widget")
 	private EventCountComponent countEvent;
 	
+	@Inject
+	@DataField("data-form")
+	private DataForm dataForm;
+	
 	@PostConstruct
 	private void constructed() {
 		NameSpec namespec = new NameSpec("Testname");
@@ -94,5 +103,13 @@ public class LandingPage extends Composite {
 		
 		parenthesesField.setValue("TEST field");
 		parenthesesTextField.setValue("TEST Text field");
+		
+		DataFormModel dataFormModel = new DataFormModel();
+		
+		dataFormModel.setStringProperty("string property");
+		dataFormModel.setDateProperty(new Date());
+		dataFormModel.setBigdecimalProperty(new BigDecimal("10123.456"));
+		
+		dataForm.setModel(dataFormModel);
 	}
 }

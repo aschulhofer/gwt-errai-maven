@@ -12,9 +12,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		
-		<!-- update to 4.0.1.Final or 4.0.2.Final as soon as published in maven repo -->
-		<errai.version>4.0.1.Beta2</errai.version>
+		<errai.version>4.0.2.Final</errai.version>
 		<gwt.version>2.8.1</gwt.version>
+		
+		<lombok.version>1.16.18</lombok.version>
 		
 		<wildfly.home>${env.WF_HOME}</wildfly.home>
 		<wildfly.version>10.1.0.Final</wildfly.version>
@@ -76,6 +77,12 @@
 				<artifactId>javaee-api</artifactId>
 				<version>7.0</version>
 				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
 			</dependency>
 			
 		</dependencies>
