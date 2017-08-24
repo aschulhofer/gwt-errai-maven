@@ -3,6 +3,7 @@ package at.woodstick.erraigwt;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.jboss.errai.common.client.dom.Div;
 import org.jboss.errai.ui.nav.client.local.DefaultPage;
 import org.jboss.errai.ui.nav.client.local.Page;
 import org.jboss.errai.ui.nav.client.local.PageShowing;
@@ -15,12 +16,25 @@ import org.slf4j.Logger;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 
-@Page(role = DefaultPage.class, path = "home")
+import at.woodstick.erraigwt.element.EventCountComponent;
+import at.woodstick.erraigwt.element.ParanthesesLabel;
+import at.woodstick.erraigwt.element.ParanthesesTextLabel;
+import at.woodstick.erraigwt.interop.wrapper.JQueryElement;
+import at.woodstick.erraigwt.interop.wrapper.JSON;
+import at.woodstick.erraigwt.interop.wrapper.SumWrapper;
+
+import static at.woodstick.erraigwt.interop.wrapper.JQuery.$;
+
+@Page(role = DefaultPage.class, path = Pages.Paths.HOME)
 @Templated
 public class LandingPage extends Composite {
 
 	@Inject
 	private Logger log;
+	
+	@Inject
+	@DataField("root")
+	private Div rootElement;
 	
 	@Inject
 	@DataField("namespec")
@@ -30,9 +44,21 @@ public class LandingPage extends Composite {
 	@DataField("namespec2")
 	private Label namespecParagraphField;
 	
+	@Inject
+	@DataField("parantheses-label")
+	private ParanthesesLabel parenthesesField;
+	
+	@Inject
+	@DataField("parantheses-text-label")
+	private ParanthesesTextLabel parenthesesTextField;
+	
 	@Inject 
 	@DataField("overview-link")
 	private TransitionAnchor<OverviewPage> overviewLink;
+	
+	@Inject
+	@DataField("count-event-widget")
+	private EventCountComponent countEvent;
 	
 	@PostConstruct
 	private void constructed() {
@@ -50,5 +76,23 @@ public class LandingPage extends Composite {
 	@PageShown
 	private void showPage() {
 		log.debug("Default page shown");
+		
+		$("body").addClass("test-query");
+		
+		JQueryElement namespec = $("[data-field=namespec]");
+		
+		String classes = namespec.addClass("test test1 test2").attr("class");
+		
+		log.debug("Classes are {}", classes);
+		
+		namespecParagraphField.setText("Classes of namespec field are: " + classes);
+		
+		SumWrapper sum = new SumWrapper();
+		sum.setOffset(100);
+		
+		log.debug(JSON.stringify(sum, null, 2));
+		
+		parenthesesField.setValue("TEST field");
+		parenthesesTextField.setValue("TEST Text field");
 	}
 }

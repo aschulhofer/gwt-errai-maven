@@ -156,6 +156,7 @@
 						<sourceLevel>1.8</sourceLevel>
 						<failOnError>true</failOnError>
 						<devmodeArgs>
+							<devmodeArg>-generateJsInteropExports</devmodeArg>
 							<devmodeArg>-style</devmodeArg>
 							<devmodeArg>PRETTY</devmodeArg>
 							<devmodeArg>-server</devmodeArg>

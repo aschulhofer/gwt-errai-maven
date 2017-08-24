@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.TextBox;
 
 import at.woodstick.erraigwt.service.TestRestEndpointService;
 
-@Page(path = "overview")
+@Page(path = Pages.Paths.OVERVIEW)
 @Templated
 public class OverviewPage implements IsElement {
 
