@@ -39,4 +39,9 @@ public class Counter {
 	public void setButton(int button) {
 		this.button = button;
 	}
+
+	@Override
+	public String toString() {
+		return "Counter [element=" + element + ", button=" + button + "]";
+	}
 }

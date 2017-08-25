@@ -12,14 +12,10 @@ public class DataFormModel {
 	private Date dateProperty;
 	private BigDecimal bigdecimalProperty;
 	
+	private Counter counterProperty;
+	
 	public DataFormModel() {
 	
-	}
-
-	public DataFormModel(String stringProperty, Date dateProperty, BigDecimal bigdecimalProperty) {
-		this.stringProperty = stringProperty;
-		this.dateProperty = dateProperty;
-		this.bigdecimalProperty = bigdecimalProperty;
 	}
 
 	public String getStringProperty() {
@@ -44,5 +40,13 @@ public class DataFormModel {
 
 	public void setBigdecimalProperty(BigDecimal bigdecimalProperty) {
 		this.bigdecimalProperty = bigdecimalProperty;
+	}
+
+	public Counter getCounterProperty() {
+		return counterProperty;
+	}
+
+	public void setCounterProperty(Counter counterProperty) {
+		this.counterProperty = counterProperty;
 	}
 }

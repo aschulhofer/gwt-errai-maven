@@ -109,6 +109,7 @@ public class LandingPage extends Composite {
 		dataFormModel.setStringProperty("string property");
 		dataFormModel.setDateProperty(new Date());
 		dataFormModel.setBigdecimalProperty(new BigDecimal("10123.456"));
+		dataFormModel.setCounterProperty(countEvent.getCounterInstance());
 		
 		dataForm.setModel(dataFormModel);
 	}

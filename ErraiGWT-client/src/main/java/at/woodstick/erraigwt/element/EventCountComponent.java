@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.jboss.errai.common.client.dom.Div;
 import org.jboss.errai.common.client.dom.Event;
 import org.jboss.errai.common.client.dom.Span;
+import org.jboss.errai.databinding.client.BindableProxy;
 import org.jboss.errai.databinding.client.api.DataBinder;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ui.client.local.api.IsElement;
@@ -44,6 +45,8 @@ public class EventCountComponent implements IsElement, HasModel<Counter> {
 	@DataField("count-button")
 	private ButtonElement countButton;
 	
+	private Counter counterInstance = new Counter(0, 0);
+	
 	@PostConstruct
 	protected void constructed() { 
 		countButton.setInnerHTML("Click me!");
@@ -51,7 +54,7 @@ public class EventCountComponent implements IsElement, HasModel<Counter> {
 	
 	@AfterInitialization
 	protected void afterInit() {
-		setModel(new Counter(0, 0));
+		setModel(counterInstance);
 	}
 	
 	@EventHandler("root")
@@ -62,6 +65,15 @@ public class EventCountComponent implements IsElement, HasModel<Counter> {
 	@EventHandler("count-button")
 	public void handleButtonClick(@ForEvent("click") Event e) {
 		getModel().incButtonCount();
+	}
+	
+	public Counter getCounterInstance() {
+		return counterInstance;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Counter getModelRef() {
+		return (Counter) ((BindableProxy<Counter>) binder.getModel()).unwrap();
 	}
 	
 	@Override

@@ -57,6 +57,11 @@ public class DataForm implements IsElement, HasModel<DataFormModel> {
 	private TextBox prop6;
 	
 	@Inject
+	@DataField("prop7")
+	@Bound(property = "counterProperty.button")
+	private TextInput prop7;
+	
+	@Inject
 	@DataField("data-form-log")
 	private Div dataFormLog;
 
