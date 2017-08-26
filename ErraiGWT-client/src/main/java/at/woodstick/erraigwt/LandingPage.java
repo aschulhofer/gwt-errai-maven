@@ -1,5 +1,11 @@
 package at.woodstick.erraigwt;
 
+import static at.woodstick.erraigwt.interop.JQuery.$;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -21,14 +27,9 @@ import at.woodstick.erraigwt.element.DataFormModel;
 import at.woodstick.erraigwt.element.EventCountComponent;
 import at.woodstick.erraigwt.element.ParanthesesLabel;
 import at.woodstick.erraigwt.element.ParanthesesTextLabel;
-import at.woodstick.erraigwt.interop.wrapper.JQueryElement;
+import at.woodstick.erraigwt.interop.JQueryElement;
 import at.woodstick.erraigwt.interop.wrapper.JSON;
 import at.woodstick.erraigwt.interop.wrapper.SumWrapper;
-
-import static at.woodstick.erraigwt.interop.wrapper.JQuery.$;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 @Page(role = DefaultPage.class, path = Pages.Paths.HOME)
 @Templated
@@ -58,6 +59,10 @@ public class LandingPage extends Composite {
 	private ParanthesesTextLabel parenthesesTextField;
 	
 	@Inject 
+	@DataField("nav-container")
+	private Nav navContainer;
+	
+	@Inject 
 	@DataField("overview-link")
 	private TransitionAnchor<OverviewPage> overviewLink;
 	
@@ -75,8 +80,10 @@ public class LandingPage extends Composite {
 		namespecInfoField.setModel(namespec);
 		
 		namespecParagraphField.setText("Not set." + " " + namespec.getConst());
+		
+		navContainer.init(Arrays.asList(Pages.OVERVIEW, Pages.DATATABLE));
 	}
-
+	
 	@PageShowing
 	private void preparePage() {
 		log.debug("Default page showing");

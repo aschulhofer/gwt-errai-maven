@@ -18,9 +18,12 @@
 		<webjarsDir>${project.build.directory}/webjars/META-INF/resources/webjars</webjarsDir>
 		<moduleShortName>app</moduleShortName>
 		
+		<elemental2.version>1.0.0-beta-1</elemental2.version>
+		
 		<!-- webjar client library versions -->
 		<bootstrap.version>3.3.7</bootstrap.version>
 		<jquery.version>2.2.4</jquery.version>
+		<jquery-datatable.version>1.10.15</jquery-datatable.version>
 	</properties>
 
 	<dependencies>
@@ -89,6 +92,17 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
 			<version>${jquery.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>datatables</artifactId>
+			<version>${jquery-datatable.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.elemental2</groupId>
+			<artifactId>elemental2-dom</artifactId>
+			<version>${elemental2.version}</version>
 		</dependency>
 	</dependencies>
 

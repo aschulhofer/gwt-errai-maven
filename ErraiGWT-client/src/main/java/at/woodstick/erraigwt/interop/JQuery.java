@@ -1,4 +1,4 @@
-package at.woodstick.erraigwt.interop.wrapper;
+package at.woodstick.erraigwt.interop;
 
 import com.google.gwt.dom.client.Element;
 

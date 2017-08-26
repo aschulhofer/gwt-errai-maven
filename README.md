@@ -18,6 +18,13 @@ Set `WF_HOME` enviornment variable to root of wildfly installation. Or set user 
 
 `mvn clean install`
 
+
+Skip gwt compilation with user property `gwt.skipCompilation`
+
+E.g.:
+`mvn clean install -Dgwt.skipCompilation=true -pl *-client`
+
+
 **Deploy to standalone wildfly**
 
 `mvn wildfly:deploy-only -Dwildfly.deployment.name=<name>.war`

@@ -19,6 +19,10 @@ import org.jboss.errai.ui.shared.api.annotations.Templated;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.TextBox;
 
+import elemental2.dom.DomGlobal;
+import elemental2.dom.HTMLDivElement;
+import elemental2.dom.HTMLElement;
+
 @Templated
 public class DataForm implements IsElement, HasModel<DataFormModel> {
 	
@@ -90,6 +94,10 @@ public class DataForm implements IsElement, HasModel<DataFormModel> {
 		Div newDiv = (Div) DOM.createDiv();
 		newDiv.setTextContent(msg);
 		dataFormLog.appendChild(newDiv);
+		
+//		HTMLElement newDiv = (HTMLElement) DomGlobal.document.createElement("div");
+//		newDiv.innerHTML = msg;
+//		dataFormLog.appendChild(newDiv);
 	}
 	
 	@Override
