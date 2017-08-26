@@ -24,6 +24,9 @@ import at.woodstick.erraigwt.interop.datatable.ColumnDefinition;
 import at.woodstick.erraigwt.interop.datatable.DatatableUtil;
 import at.woodstick.erraigwt.interop.datatable.JQueryDatatableOptions;
 import elemental2.core.JsObject;
+import elemental2.dom.DomGlobal;
+import elemental2.dom.HTMLDivElement;
+import elemental2.dom.HTMLTableElement;
 
 @Page(path = Pages.Paths.DATATABLE)
 @Templated
@@ -36,11 +39,22 @@ public class DatatablePage implements IsElement {
 	@DataField("nav-container")
 	private Nav navContainer;
 	
+	@Inject
+	@DataField("main")
+	private HTMLDivElement elemental2Div;
+	
+	
+//	@DataField("test-datatable")
+//	private HTMLTableElement datatableRoot = (HTMLTableElement) DomGlobal.document.createElement("table");
+	
+	@Inject
+	@DataField("test-datatable")
+	private HTMLTableElement datatableRoot;
+	
 	@PostConstruct
 	private void constructed() {
 		navContainer.init(Arrays.asList(Pages.HOME));
 	}
-
 	
 	@PageShowing
 	private void preparePage() {
@@ -77,16 +91,6 @@ public class DatatablePage implements IsElement {
 		JQueryDatatableOptions options = DatatableUtil.createOptions();
 		options.columns = new ColumnDefinition[] {col1, col2};
 		
-//		options.data = new String[][] {
-//			new String[] {"A1", "B1"},
-//			new String[] {"A2", "B2"}
-//		};
-		
-//		options.data = new String[][] {
-//			new String[] {"A1", "B1"},
-//			new String[] {"A2", "B2"}
-//		};
-		
 		AjaxOptions ajaxOptions = DatatableUtil.createAjaxOptions();
 		ajaxOptions.url = "rest/items/specs";
 		
@@ -96,7 +100,7 @@ public class DatatablePage implements IsElement {
 		
 		console.log(options);
 		
-		JQuery.$("#test-datatable").createDatatable(options);
+		JQuery.$(datatableRoot).createDatatable(options);
 	}
 	
 	@AfterInitialization
