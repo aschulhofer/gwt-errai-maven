@@ -1,30 +1,29 @@
 package at.woodstick.erraigwt.element;
 
-import org.jboss.errai.common.client.api.annotations.Element;
-import org.jboss.errai.common.client.dom.Label;
 import org.jboss.errai.common.client.ui.HasValue;
 
+import elemental2.dom.HTMLLabelElement;
 import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType(isNative = true)
-@Element("label")
-public interface ParanthesesTextLabel extends Label, HasValue<String> {
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "HTMLLabelElement")
+public class ParanthesesTextLabel extends HTMLLabelElement implements HasValue<String> {
 	
-	@JsOverlay
 	@Override
-	default String getValue() {
-		return wrapValue(getTextContent());
+	@JsOverlay
+	public final String getValue() {
+		return wrapValue(textContent);
+	}
+	
+	@Override
+	@JsOverlay
+	public final void setValue(String value) {
+		textContent = wrapValue(value);
 	}
 	
 	@JsOverlay
-	@Override
-	default void setValue(String value) {
-		setTextContent(wrapValue(value));
-	}
-	
-	@JsOverlay
-	default String wrapValue(String value) {
+	public final String wrapValue(String value) {
 		return " (( " + value + " )) ";
 	}
 }

@@ -9,7 +9,6 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.jboss.errai.common.client.dom.Div;
 import org.jboss.errai.ui.nav.client.local.DefaultPage;
 import org.jboss.errai.ui.nav.client.local.Page;
 import org.jboss.errai.ui.nav.client.local.PageShowing;
@@ -30,6 +29,7 @@ import at.woodstick.erraigwt.element.ParanthesesTextLabel;
 import at.woodstick.erraigwt.interop.JQueryElement;
 import at.woodstick.erraigwt.interop.wrapper.JSON;
 import at.woodstick.erraigwt.interop.wrapper.SumWrapper;
+import elemental2.dom.HTMLDivElement;
 
 @Page(role = DefaultPage.class, path = Pages.Paths.HOME)
 @Templated
@@ -40,7 +40,7 @@ public class LandingPage extends Composite {
 	
 	@Inject
 	@DataField("root")
-	private Div rootElement;
+	private HTMLDivElement rootElement;
 	
 	@Inject
 	@DataField("namespec")

@@ -2,10 +2,8 @@ package at.woodstick.erraigwt.element;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.jboss.errai.common.client.dom.Div;
-import org.jboss.errai.common.client.dom.Event;
-import org.jboss.errai.common.client.dom.TextInput;
 import org.jboss.errai.databinding.client.api.DataBinder;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.client.widget.HasModel;
@@ -16,8 +14,12 @@ import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.ForEvent;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.TextBox;
+
+import elemental2.dom.DomGlobal;
+import elemental2.dom.Event;
+import elemental2.dom.HTMLDivElement;
+import elemental2.dom.HTMLInputElement;
 
 @Templated
 public class DataForm implements IsElement, HasModel<DataFormModel> {
@@ -29,27 +31,29 @@ public class DataForm implements IsElement, HasModel<DataFormModel> {
 	@Inject
 	@DataField("prop1")
 	@Bound(property = "stringProperty")
-	private Div prop1;
+	private HTMLDivElement prop1;
 	
 	@Inject
 	@DataField("prop2")
 	@Bound(property = "dateProperty")
-	private Div prop2;
+	private HTMLDivElement prop2;
 	
 	@Inject
 	@DataField("prop3")
 	@Bound(property = "bigdecimalProperty")
-	private Div prop3;
+	private HTMLDivElement prop3;
 	
 	@Inject
+	@Named("inputtext")
 	@DataField("prop4")
 	@Bound(property = "stringProperty")
-	private TextInput prop4;
+	private HTMLInputElement prop4;
 	
-	@Inject
+	@Inject 
+	@Named("inputtext")
 	@DataField("prop5")
 	@Bound(property = "dateProperty")
-	private TextInput prop5;
+	private HTMLInputElement prop5;
 	
 	@Inject
 	@DataField("prop6")
@@ -57,13 +61,14 @@ public class DataForm implements IsElement, HasModel<DataFormModel> {
 	private TextBox prop6;
 	
 	@Inject
+	@Named("inputtext")
 	@DataField("prop7")
 	@Bound(property = "counterProperty.button")
-	private TextInput prop7;
+	private HTMLInputElement prop7;
 	
 	@Inject
 	@DataField("data-form-log")
-	private Div dataFormLog;
+	private HTMLDivElement dataFormLog;
 
 	@PostConstruct
 	private void constructed() {
@@ -87,13 +92,9 @@ public class DataForm implements IsElement, HasModel<DataFormModel> {
 	}
 	
 	protected void appendLog(final String msg) {
-		Div newDiv = (Div) DOM.createDiv();
-		newDiv.setTextContent(msg);
+		HTMLDivElement newDiv = (HTMLDivElement) DomGlobal.document.createElement("div");
+		newDiv.textContent = msg + " (elemental2)";
 		dataFormLog.appendChild(newDiv);
-		
-//		HTMLElement newDiv = (HTMLElement) DomGlobal.document.createElement("div");
-//		newDiv.innerHTML = msg;
-//		dataFormLog.appendChild(newDiv);
 	}
 	
 	@Override

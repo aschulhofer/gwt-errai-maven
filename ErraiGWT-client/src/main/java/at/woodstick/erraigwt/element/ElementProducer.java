@@ -1,21 +1,30 @@
 package at.woodstick.erraigwt.element;
 
 import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 
 import elemental2.dom.DomGlobal;
-import elemental2.dom.HTMLDivElement;
-import elemental2.dom.HTMLTableElement;
+import elemental2.dom.HTMLElement;
+import elemental2.dom.HTMLInputElement;
 
 public class ElementProducer {
 
 	@Produces
-	public HTMLTableElement tableElement() {
-		return (HTMLTableElement) DomGlobal.document.createElement("table");
+	@Named("inputtext")
+	public HTMLInputElement inputTextElement() {
+		
+		HTMLInputElement element = (HTMLInputElement) DomGlobal.document.createElement("input");
+		element.type = "text";
+		
+		return element;
 	}
 	
 	@Produces
-	public HTMLDivElement divElement() {
-		return (HTMLDivElement) DomGlobal.document.createElement("div");
+	@Named("span")
+	public HTMLElement spanElement() {
+		
+		HTMLElement element = (HTMLElement) DomGlobal.document.createElement("span");
+		
+		return element;
 	}
-	
 }

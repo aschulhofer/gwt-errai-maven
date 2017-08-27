@@ -2,10 +2,8 @@ package at.woodstick.erraigwt.element;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.jboss.errai.common.client.dom.Div;
-import org.jboss.errai.common.client.dom.Event;
-import org.jboss.errai.common.client.dom.Span;
 import org.jboss.errai.databinding.client.BindableProxy;
 import org.jboss.errai.databinding.client.api.DataBinder;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
@@ -18,7 +16,10 @@ import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.ForEvent;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 
-import com.google.gwt.dom.client.ButtonElement;
+import elemental2.dom.Event;
+import elemental2.dom.HTMLButtonElement;
+import elemental2.dom.HTMLDivElement;
+import elemental2.dom.HTMLElement;
 
 @Templated
 public class EventCountComponent implements IsElement, HasModel<Counter> {
@@ -29,27 +30,29 @@ public class EventCountComponent implements IsElement, HasModel<Counter> {
 	
 	@Inject
 	@DataField("root")
-	private Div rootElement;
+	private HTMLDivElement rootElement;
 	
 	@Inject
+	@Named("span")
 	@DataField("element-count")
 	@Bound(property = "element")
-	private Span elementCountDisplay;
+	private HTMLElement elementCountDisplay;
 
 	@Inject
+	@Named("span")
 	@DataField("button-count")
 	@Bound(property = "button")
-	private Span buttonCountDisplay;
+	private HTMLElement buttonCountDisplay;
 	
 	@Inject
 	@DataField("count-button")
-	private ButtonElement countButton;
+	private HTMLButtonElement countButton;
 	
 	private Counter counterInstance = new Counter(0, 0);
 	
 	@PostConstruct
 	protected void constructed() { 
-		countButton.setInnerHTML("Click me!");
+		countButton.innerHTML = "Click me!";
 	}
 	
 	@AfterInitialization
