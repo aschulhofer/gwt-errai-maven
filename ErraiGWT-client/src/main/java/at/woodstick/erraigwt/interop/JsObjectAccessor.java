@@ -26,6 +26,14 @@ public class JsObjectAccessor {
 		return JsUtil.getObjectProperty(object, propertyName);
 	}
 	
+	public void setProperty(final String propertyName, final int value) {
+		JsUtil.setIntObjectProperty(object, propertyName, value);
+	}
+	
+	public <V> void setProperty(final String propertyName, final V value) {
+		JsUtil.setObjectProperty(object, propertyName, value);
+	}
+	
 	public static JsObjectAccessor of(Object jsOject) {
 		return of(new JsObject(jsOject));
 	}

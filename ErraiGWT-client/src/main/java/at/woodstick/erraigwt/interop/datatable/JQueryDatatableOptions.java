@@ -18,6 +18,9 @@ public class JQueryDatatableOptions {
 
 	@JsProperty
 	public boolean processing;
+
+	@JsProperty
+	public boolean deferRender;
 	
 	@JsProperty
 	public ColumnDefinition[] columns;

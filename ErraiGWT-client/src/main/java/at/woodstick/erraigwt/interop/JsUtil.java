@@ -10,4 +10,12 @@ public final class JsUtil {
 	    return object[propertyName];
 	}-*/;
 	
+	public static native <O> void setIntObjectProperty(O object, String propertyName, int value) /*-{
+		object[propertyName] = value;
+	}-*/;
+	
+	public static native <O, V> void setObjectProperty(O object, String propertyName, V value) /*-{
+    	object[propertyName] = value;
+	}-*/;
+	
 }

@@ -1,7 +1,7 @@
 package at.woodstick.erraigwt;
 
-import static elemental2.dom.DomGlobal.console;
 import static at.woodstick.erraigwt.interop.JsObjectAccessor.access;
+import static elemental2.dom.DomGlobal.console;
 
 import java.util.Arrays;
 
@@ -23,8 +23,8 @@ import at.woodstick.erraigwt.interop.datatable.AjaxOptions;
 import at.woodstick.erraigwt.interop.datatable.ColumnDefinition;
 import at.woodstick.erraigwt.interop.datatable.DatatableUtil;
 import at.woodstick.erraigwt.interop.datatable.JQueryDatatableOptions;
+import elemental2.core.Array;
 import elemental2.core.JsObject;
-import elemental2.dom.DomGlobal;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLTableElement;
 
@@ -67,7 +67,7 @@ public class DatatablePage implements IsElement {
 		
 		ColumnDefinition col1 = DatatableUtil.createColumn()
 				.className("col-1")
-				.orderable(false)
+				.orderable(true)
 				.data("id")
 				;
 		
@@ -93,6 +93,29 @@ public class DatatablePage implements IsElement {
 		
 		AjaxOptions ajaxOptions = DatatableUtil.createAjaxOptions();
 		ajaxOptions.url = "rest/items/specs";
+		ajaxOptions.dataSrc = new AjaxOptions.DataSrc<Object, Array<?>>() {
+			@Override
+			public Array<?> dataSrc(Object data) {
+				
+				console.log("data from server:", data);
+				
+				return access(data).getProperty("data");
+			}
+		};
+		
+		final int numberOfItems = 123;
+		
+		ajaxOptions.data = new AjaxOptions.DataRefiner<Object, Void>() {
+			@Override
+			public Void data(Object data) {
+				
+				console.log("data to server:", data);
+				
+				access(data).setProperty("numberOfItems", numberOfItems);
+				
+				return null;
+			}
+		};
 		
 		options.ajax = ajaxOptions;
 		
