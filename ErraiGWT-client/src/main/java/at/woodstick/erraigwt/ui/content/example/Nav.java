@@ -1,4 +1,4 @@
-package at.woodstick.erraigwt;
+package at.woodstick.erraigwt.ui.content.example;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 
+import at.woodstick.erraigwt.Pages;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.HTMLAnchorElement;
 import elemental2.dom.HTMLDivElement;

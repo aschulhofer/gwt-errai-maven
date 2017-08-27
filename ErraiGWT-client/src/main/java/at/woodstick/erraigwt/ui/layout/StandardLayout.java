@@ -12,6 +12,7 @@ import elemental2.dom.HTMLDivElement;
 public abstract class StandardLayout implements IsElement {
 
 	public static final String TEMPLATE = "/at/woodstick/erraigwt/ui/layout/StandardLayout.html";
+	public static final String FIELD_CONTENT = "layout-content";
 	
 	@Inject
 	@DataField("layout-header")
@@ -22,6 +23,6 @@ public abstract class StandardLayout implements IsElement {
 	protected NavBar navBar;
 	
 	@Inject
-	@DataField("layout-content")
+	@DataField(FIELD_CONTENT)
 	protected HTMLDivElement content;
 }

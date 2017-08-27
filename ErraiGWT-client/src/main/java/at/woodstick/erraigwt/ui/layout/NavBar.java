@@ -25,8 +25,7 @@ public class NavBar implements IsElement {
 	public void addNavigationSection(NavItem navItem) {
 		NavLink navLink = navLinkInstance.get();
 		
-		navLink.getNavAnchor().href = "#" + navItem.getLinkPath().getPath();
-		navLink.getNavAnchor().innerHTML = navItem.getDisplayTextKey();
+		navLink.setDisplayText(navItem.getDisplayTextKey());
 		
 		navLink.disable();
 		
@@ -40,8 +39,8 @@ public class NavBar implements IsElement {
 	public void addNavigationLink(NavItem navItem, boolean isActive) {
 		NavLink navLink = navLinkInstance.get();
 		
-		navLink.getNavAnchor().href = "#" + navItem.getLinkPath().getPath();
-		navLink.getNavAnchor().innerHTML = navItem.getDisplayTextKey();
+		navLink.setAnchor("#" + navItem.getLinkPath().getPath());
+		navLink.setDisplayText(navItem.getDisplayTextKey());
 		
 		if(isActive) {
 			navLink.active();
@@ -50,7 +49,10 @@ public class NavBar implements IsElement {
 		navContainer.appendChild(navLink.getElement());
 	}
 	
+	/**
+	 * TODO: implement
+	 */
 	public void addNavigationLinkButton(NavItem navItem) {
-		
+		throw new UnsupportedOperationException();
 	}
 }

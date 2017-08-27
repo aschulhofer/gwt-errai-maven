@@ -1,4 +1,4 @@
-package at.woodstick.erraigwt;
+package at.woodstick.erraigwt.ui.content.example;
 
 import static at.woodstick.erraigwt.interop.JsObjectAccessor.access;
 import static elemental2.dom.DomGlobal.console;
@@ -8,15 +8,13 @@ import java.util.Arrays;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ui.client.local.api.IsElement;
-import org.jboss.errai.ui.nav.client.local.Page;
-import org.jboss.errai.ui.nav.client.local.PageShowing;
 import org.jboss.errai.ui.nav.client.local.PageShown;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.slf4j.Logger;
 
+import at.woodstick.erraigwt.Pages;
 import at.woodstick.erraigwt.interop.JQuery;
 import at.woodstick.erraigwt.interop.JsUtil;
 import at.woodstick.erraigwt.interop.datatable.AjaxOptions;
@@ -28,9 +26,8 @@ import elemental2.core.JsObject;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLTableElement;
 
-@Page(path = Pages.Paths.DATATABLE)
 @Templated
-public class DatatablePage implements IsElement {
+public class DatatablePageContent implements IsElement {
 
 	@Inject
 	private Logger log;
@@ -52,13 +49,7 @@ public class DatatablePage implements IsElement {
 		navContainer.init(Arrays.asList(Pages.HOME));
 	}
 	
-	@PageShowing
-	private void preparePage() {
-		log.debug("Overview page showing");
-	}
-
-	@PageShown
-	private void showPage() {
+	public void init() {
 		log.debug("Overview page shown");
 		
 		ColumnDefinition col1 = DatatableUtil.createColumn()
@@ -120,10 +111,5 @@ public class DatatablePage implements IsElement {
 		console.log(options);
 		
 		JQuery.$(datatableRoot).createDatatable(options);
-	}
-	
-	@AfterInitialization
-	private void afterInit() {
-		
 	}
 }

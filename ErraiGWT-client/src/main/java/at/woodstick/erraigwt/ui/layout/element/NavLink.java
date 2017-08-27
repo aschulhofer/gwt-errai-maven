@@ -7,6 +7,7 @@ import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 
 import elemental2.dom.HTMLAnchorElement;
+import elemental2.dom.HTMLElement;
 import elemental2.dom.HTMLLIElement;
 
 @Templated
@@ -23,25 +24,39 @@ public class NavLink implements IsElement {
 	@DataField("nav-anchor")
 	private HTMLAnchorElement navAnchor;
 
+	public NavLink setDisplayText(final String displayText) {
+		navAnchor.textContent = displayText;
+		return this;
+	}
+	
+	public NavLink setAnchor(final String href) {
+		navAnchor.href = href;
+		return this;
+	}
+	
 	public void active() {
-		if(navItem.classList != null) {
-			navItem.classList.add(CSS_ACTIVE);
-		}
-		else {
-			navItem.className += " " + CSS_ACTIVE;
-		}
+		addCSSClass(navItem, CSS_ACTIVE);
 	}
 	
 	public void disable() {
-		if(navItem.classList != null) {
-			navItem.classList.add(CSS_DISABLED);
+		addCSSClass(navItem, CSS_DISABLED);
+	}
+	
+	private void addCSSClass(HTMLElement element, final String cssClass) {
+		if(element.classList != null) {
+			element.classList.add(cssClass);
 		}
 		else {
-			navItem.className += " " + CSS_DISABLED;
+			element.className += " " + cssClass;
 		}
 	}
 	
-	public HTMLAnchorElement getNavAnchor() {
-		return navAnchor;
+	private void removeCSSClass(HTMLElement element, final String cssClass) {
+		if(element.classList != null) {
+			element.classList.remove(cssClass);
+		}
+		else {
+			element.className = element.className.replaceAll("(\\s|^)" + cssClass + "(\\s|$)", "");
+		}
 	}
 }

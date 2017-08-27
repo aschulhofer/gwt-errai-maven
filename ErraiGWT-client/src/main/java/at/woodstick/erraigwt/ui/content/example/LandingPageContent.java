@@ -1,4 +1,4 @@
-package at.woodstick.erraigwt;
+package at.woodstick.erraigwt.ui.content.example;
 
 import static at.woodstick.erraigwt.interop.JQuery.$;
 
@@ -9,10 +9,6 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.jboss.errai.ui.nav.client.local.DefaultPage;
-import org.jboss.errai.ui.nav.client.local.Page;
-import org.jboss.errai.ui.nav.client.local.PageShowing;
-import org.jboss.errai.ui.nav.client.local.PageShown;
 import org.jboss.errai.ui.nav.client.local.TransitionAnchor;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
@@ -21,6 +17,9 @@ import org.slf4j.Logger;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 
+import at.woodstick.erraigwt.NameSpec;
+import at.woodstick.erraigwt.NameSpecInfo;
+import at.woodstick.erraigwt.Pages;
 import at.woodstick.erraigwt.element.DataForm;
 import at.woodstick.erraigwt.element.DataFormModel;
 import at.woodstick.erraigwt.element.EventCountComponent;
@@ -29,11 +28,11 @@ import at.woodstick.erraigwt.element.ParanthesesTextLabel;
 import at.woodstick.erraigwt.interop.JQueryElement;
 import at.woodstick.erraigwt.interop.wrapper.JSON;
 import at.woodstick.erraigwt.interop.wrapper.SumWrapper;
+import at.woodstick.erraigwt.ui.page.example.OverviewPage;
 import elemental2.dom.HTMLDivElement;
 
-@Page(path = Pages.Paths.HOME) //, role = DefaultPage.class)
 @Templated
-public class LandingPage extends Composite {
+public class LandingPageContent extends Composite {
 
 	@Inject
 	private Logger log;
@@ -81,16 +80,10 @@ public class LandingPage extends Composite {
 		
 		namespecParagraphField.setText("Not set." + " " + namespec.getConst());
 		
-		navContainer.init(Arrays.asList(Pages.OVERVIEW, Pages.DATATABLE, Pages.LAYOUT));
+		navContainer.init(Arrays.asList(Pages.values()));
 	}
 	
-	@PageShowing
-	private void preparePage() {
-		log.debug("Default page showing");
-	}
-
-	@PageShown
-	private void showPage() {
+	public void showPage() {
 		log.debug("Default page shown");
 		
 		$("body").addClass("test-query");

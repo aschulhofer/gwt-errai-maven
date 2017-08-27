@@ -1,4 +1,4 @@
-package at.woodstick.erraigwt;
+package at.woodstick.erraigwt.ui.content.example;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -9,9 +9,6 @@ import org.jboss.errai.enterprise.client.jaxrs.MarshallingWrapper;
 import org.jboss.errai.enterprise.client.jaxrs.api.RestErrorCallback;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ui.client.local.api.IsElement;
-import org.jboss.errai.ui.nav.client.local.Page;
-import org.jboss.errai.ui.nav.client.local.PageShowing;
-import org.jboss.errai.ui.nav.client.local.PageShown;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.slf4j.Logger;
@@ -26,11 +23,12 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
+import at.woodstick.erraigwt.ItemSpec;
+import at.woodstick.erraigwt.ItemSpecInfo;
 import at.woodstick.erraigwt.service.TestRestEndpointService;
 
-@Page(path = Pages.Paths.OVERVIEW)
 @Templated
-public class OverviewPage implements IsElement {
+public class OverviewPageContent implements IsElement {
 
 	@Inject
 	private Logger log;
@@ -89,16 +87,6 @@ public class OverviewPage implements IsElement {
 
 	private void setItemText(HasText element, ItemSpec item) {
 		element.setText(item.getItemNumber());
-	}
-	
-	@PageShowing
-	private void preparePage() {
-		log.debug("Overview page showing");
-	}
-
-	@PageShown
-	private void showPage() {
-		log.debug("Overview page shown");
 	}
 	
 	@AfterInitialization
