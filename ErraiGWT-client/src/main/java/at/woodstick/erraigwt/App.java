@@ -4,7 +4,6 @@ import javax.annotation.PostConstruct;
 
 import org.jboss.errai.enterprise.client.jaxrs.api.RestClient;
 import org.jboss.errai.ioc.client.api.EntryPoint;
-import org.jboss.errai.ui.nav.client.local.DefaultPage;
 import org.jboss.errai.ui.nav.client.local.Navigation;
 import org.jboss.errai.ui.nav.client.local.UniquePageRole;
 import org.jboss.errai.ui.nav.client.local.api.PageNavigationErrorHandler;
@@ -59,7 +58,5 @@ public class App {
 				log.error("Uncaught GWT exception!", e);
 			}
 		});
-		
-		navigation.goToWithRole(DefaultPage.class);
 	}
 }

@@ -5,6 +5,7 @@ public enum Pages {
 	  HOME(Paths.HOME, "Home")
 	, OVERVIEW(Paths.OVERVIEW, "Overview")
 	, DATATABLE(Paths.DATATABLE, "Datatable")
+	, LAYOUT(Paths.LAYOUT, "Layout")
 	;
 	
 	private final String path;
@@ -27,5 +28,6 @@ public enum Pages {
 		String HOME = "home";
 		String OVERVIEW = "overview";
 		String DATATABLE = "datatable";
+		String LAYOUT = "layout";
 	}
 }

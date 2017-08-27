@@ -31,7 +31,7 @@ import at.woodstick.erraigwt.interop.wrapper.JSON;
 import at.woodstick.erraigwt.interop.wrapper.SumWrapper;
 import elemental2.dom.HTMLDivElement;
 
-@Page(role = DefaultPage.class, path = Pages.Paths.HOME)
+@Page(path = Pages.Paths.HOME) //, role = DefaultPage.class)
 @Templated
 public class LandingPage extends Composite {
 
@@ -81,7 +81,7 @@ public class LandingPage extends Composite {
 		
 		namespecParagraphField.setText("Not set." + " " + namespec.getConst());
 		
-		navContainer.init(Arrays.asList(Pages.OVERVIEW, Pages.DATATABLE));
+		navContainer.init(Arrays.asList(Pages.OVERVIEW, Pages.DATATABLE, Pages.LAYOUT));
 	}
 	
 	@PageShowing

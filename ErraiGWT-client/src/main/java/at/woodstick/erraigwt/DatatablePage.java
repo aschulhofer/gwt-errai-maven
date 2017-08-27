@@ -43,10 +43,6 @@ public class DatatablePage implements IsElement {
 	@DataField("main")
 	private HTMLDivElement elemental2Div;
 	
-	
-//	@DataField("test-datatable")
-//	private HTMLTableElement datatableRoot = (HTMLTableElement) DomGlobal.document.createElement("table");
-	
 	@Inject
 	@DataField("test-datatable")
 	private HTMLTableElement datatableRoot;
